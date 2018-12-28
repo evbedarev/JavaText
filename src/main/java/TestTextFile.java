@@ -6,19 +6,27 @@ import java.util.regex.Pattern;
 public class TestTextFile {
     public static void main(String[] args) throws Exception {
 
-        Pattern pattern = Pattern.compile("([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})\\.([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})\\.([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})");
-        TextFileOperations readTextFile = new TextFileOperations("C:\\TEMP\\mac.txt");
+        Pattern patternMac = Pattern.compile("([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})\\.([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})\\.([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})");
+        Pattern patternIP =  Pattern.compile("([0-9]{3}\\.[0-9]{2}\\.[0-9]{2,3}\\.[0-9]{1,3})");
+        TextFileOperations readTextFile = new TextFileOperations("C:\\TEMP\\mac_not_formated.txt");
         List<StringBuffer> text = readTextFile.readLines();
         List<StringBuffer> newText = new ArrayList<StringBuffer>();
 
 
         for (StringBuffer stringBuffer : text) {
-            Matcher matcher = pattern.matcher(stringBuffer);
+            Matcher matcherMac = patternMac.matcher(stringBuffer);
+            Matcher matcherIP = patternIP.matcher(stringBuffer);
             StringBuffer sb = new StringBuffer();
-            if (matcher.find()) {
-                System.out.println(matcher.group());
+
+            if (matcherIP.find()) {
+                sb.append(matcherIP.group());
+                sb.append(";");
+            }
+
+            if (matcherMac.find()) {
+                System.out.println(matcherMac.group());
                 for (int i = 1; i < 7; i++) {
-                    sb.append(matcher.group(i));
+                    sb.append(matcherMac.group(i));
                     if (i != 6)
                         sb.append("-");
                 }
