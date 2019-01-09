@@ -18,28 +18,34 @@ public class FormatMinusIP {
         FormatMinusIP.consumerFile = consumerFile;
     }
 
-    public void formatIp() throws Exception {
+    public Matcher findMac(StringBuffer stringBuffer) {
         Pattern patternMac = Pattern.compile("([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})\\.([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})\\.([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})");
+        return patternMac.matcher(stringBuffer);
+    }
+
+    public Matcher findIp(StringBuffer stringBuffer) {
         Pattern patternIP =  Pattern.compile("([0-9]{3}\\.[0-9]{2}\\.[0-9]{2,3}\\.[0-9]{1,3})");
+        return patternIP.matcher(stringBuffer);
+    }
+
+    public void formatIp() throws Exception {
         TextFileOperations readTextFile = new TextFileOperations(sourceFile);
         List<StringBuffer> text = readTextFile.readLines();
         List<StringBuffer> newText = new ArrayList<StringBuffer>();
-
+        Matcher matcher;
 
         for (StringBuffer stringBuffer : text) {
-            Matcher matcherMac = patternMac.matcher(stringBuffer);
-            Matcher matcherIP = patternIP.matcher(stringBuffer);
             StringBuffer sb = new StringBuffer();
 
-            if (matcherIP.find()) {
-                sb.append(matcherIP.group());
+            if ((matcher = findIp(stringBuffer)).find()) {
+                sb.append(matcher.group());
                 sb.append(";");
             }
 
-            if (matcherMac.find()) {
-                System.out.println(matcherMac.group());
+            if ((matcher = findMac(stringBuffer)).find()) {
+                System.out.println(matcher.group());
                 for (int i = 1; i < 7; i++) {
-                    sb.append(matcherMac.group(i));
+                    sb.append(matcher.group(i));
                     if (i != 6)
                         sb.append("-");
                 }
