@@ -4,18 +4,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * read lines from source file and find ip and mac-address ('xxxx.xxxx.xxxx')
+ * read lines from source file, find ip and mac-address ('xxxx.xxxx.xxxx')
  * format mac address from view 'xxxx.xxxx.xxxx' to view 'xx-xx-xx-xx-xx-xx'
  * write to consumer file lines type 'ip;mac-address'
  */
 
-public class FormatMinusIP {
+public class FormatMacToMinus {
     public static String sourceFile = "C:\\TEMP\\mac_not_formated.txt";
     public static String consumerFile = "C:\\TEMP\\copy_mac.txt";
 
-    public FormatMinusIP(String sourceFile, String consumerFile) {
-        FormatMinusIP.sourceFile = sourceFile;
-        FormatMinusIP.consumerFile = consumerFile;
+    public FormatMacToMinus(String sourceFile, String consumerFile) {
+        FormatMacToMinus.sourceFile = sourceFile;
+        FormatMacToMinus.consumerFile = consumerFile;
+
     }
 
     public Matcher findMac(StringBuffer stringBuffer) {
@@ -23,12 +24,8 @@ public class FormatMinusIP {
         return patternMac.matcher(stringBuffer);
     }
 
-    public Matcher findIp(StringBuffer stringBuffer) {
-        Pattern patternIP =  Pattern.compile("([0-9]{3}\\.[0-9]{2}\\.[0-9]{2,3}\\.[0-9]{1,3})");
-        return patternIP.matcher(stringBuffer);
-    }
 
-    public void formatIp() throws Exception {
+    public void writeFormatedMacToFile() throws Exception {
         TextFileOperations readTextFile = new TextFileOperations(sourceFile);
         List<StringBuffer> text = readTextFile.readLines();
         List<StringBuffer> newText = new ArrayList<StringBuffer>();
@@ -36,11 +33,6 @@ public class FormatMinusIP {
 
         for (StringBuffer stringBuffer : text) {
             StringBuffer sb = new StringBuffer();
-
-            if ((matcher = findIp(stringBuffer)).find()) {
-                sb.append(matcher.group());
-                sb.append(";");
-            }
 
             if ((matcher = findMac(stringBuffer)).find()) {
                 System.out.println(matcher.group());
@@ -53,5 +45,9 @@ public class FormatMinusIP {
             newText.add(sb);
         }
         readTextFile.writeLinesToFile(consumerFile, newText);
+    }
+
+    public List<StringBuffer> formatMacList() {
+
     }
 }
