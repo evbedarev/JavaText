@@ -1,3 +1,5 @@
+import file_operations.TextFileOperations;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -9,13 +11,13 @@ import java.util.regex.Pattern;
  * write to consumer file lines type 'ip;mac-address'
  */
 
-public class FormatMacToMinus {
+public class FormatMacToMinus_old {
     public static String sourceFile = "C:\\TEMP\\mac_not_formated.txt";
     public static String consumerFile = "C:\\TEMP\\copy_mac.txt";
 
-    public FormatMacToMinus(String sourceFile, String consumerFile) {
-        FormatMacToMinus.sourceFile = sourceFile;
-        FormatMacToMinus.consumerFile = consumerFile;
+    public FormatMacToMinus_old(String sourceFile, String consumerFile) {
+        FormatMacToMinus_old.sourceFile = sourceFile;
+        FormatMacToMinus_old.consumerFile = consumerFile;
 
     }
 
@@ -47,7 +49,7 @@ public class FormatMacToMinus {
         readTextFile.writeLinesToFile(consumerFile, newText);
     }
 
-    public List<StringBuffer> formatMacList() {
-
-    }
+//    public List<StringBuffer> formatMacList() {
+//
+//    }
 }
