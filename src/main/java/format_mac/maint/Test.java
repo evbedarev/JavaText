@@ -1,9 +1,11 @@
-import format_mac_from.FormatMacFromDot4;
-import format_mac_from.FormatMacFromMinus2;
-import format_mac_from.FormatMacInterface;
-import format_mac_to.FormatMacToColon2;
-import format_mac_to.FormatMacToDot4;
-import format_mac_to.FormatMacToInterface;
+package format_mac.maint;
+
+import format_mac.format_mac_from.FormatMacFromDot4;
+import format_mac.format_mac_from.FormatMacFromMinus2;
+import format_mac.format_mac_from.FormatMacInterface;
+import format_mac.format_mac_to.FormatMacToColon2;
+import format_mac.format_mac_to.FormatMacToDot4;
+import format_mac.format_mac_to.FormatMacToInterface;
 
 import java.util.List;
 

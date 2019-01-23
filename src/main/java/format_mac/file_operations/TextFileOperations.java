@@ -1,4 +1,4 @@
-package file_operations;
+package format_mac.file_operations;
 
 import java.io.FileReader;
 import java.io.FileWriter;

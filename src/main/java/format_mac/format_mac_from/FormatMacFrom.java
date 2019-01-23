@@ -1,6 +1,6 @@
-package format_mac_from;
+package format_mac.format_mac_from;
 
-import file_operations.TextFileOperations;
+import format_mac.file_operations.TextFileOperations;
 
 import java.util.ArrayList;
 import java.util.List;
